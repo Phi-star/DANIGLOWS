@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard | GarleyIncomeRevenue</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+    <div class="dashboard-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <h2>Garley<span>Income</span>Revenue</h2>
+            </div>
+
+            <nav class="sidebar-nav">
+                <ul>
+                    <li class="active">
+                        <a href="#">
+                            <i class="fas fa-home"></i>
+                            <span>Dashboard</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#portfolio">
+                            <i class="fas fa-chart-pie"></i>
+                            <span>Portfolio</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#invest">
+                            <i class="fas fa-hand-holding-usd"></i>
+                            <span>Invest Now</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#transactions">
+                            <i class="fas fa-exchange-alt"></i>
+                            <span>Transactions</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#support">
+                            <i class="fas fa-headset"></i>
+                            <span>Support</span>
+                        </a>
+                    </li>
+                    <li class="admin-only">
+                        <a href="#admin">
+                            <i class="fas fa-user-shield"></i>
+                            <span>Admin Panel</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="sidebar-footer">
+                <div class="user-profile">
+                    <div class="profile-image">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="profile-info">
+                        <h4 id="username-display">Loading...</h4>
+                        <p id="user-email">user@example.com</p>
+                    </div>
+                    <button class="profile-toggle">
+                        <i class="fas fa-chevron-down"></i>
+                    </button>
+                </div>
+                <div class="profile-dropdown">
+                    <ul>
+                        <li>
+                            <a href="#profile">
+                                <i class="fas fa-user-cog"></i>
+                                <span>Profile Settings</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#security">
+                                <i class="fas fa-shield-alt"></i>
+                                <span>Security</span>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#" id="logout-btn">
+                                <i class="fas fa-sign-out-alt"></i>
+                                <span>Logout</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="main-header">
+                <div class="header-left">
+                    <h1>Investment Dashboard</h1>
+                    <p id="current-date">Loading date...</p>
+                </div>
+                <div class="header-right">
+                    <div class="notification-bell">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-count">3</span>
+                    </div>
+                    <div class="quick-stats">
+                        <div class="stat-item">
+                            <i class="fas fa-wallet"></i>
+                            <span id="balance-amount">$0.00</span>
+                        </div>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Overview -->
+            <section class="dashboard-overview">
+                <div class="overview-cards">
+                    <div class="card">
+                        <div class="card-icon bg-primary">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Portfolio Value</h3>
+                            <p id="portfolio-value">$0.00</p>
+                            <span class="change positive"><i class="fas fa-arrow-up"></i> 0.00%</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon bg-success">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Total Profit</h3>
+                            <p id="total-profit">$0.00</p>
+                            <span class="change positive"><i class="fas fa-arrow-up"></i> 0.00%</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon bg-warning">
+                            <i class="fas fa-hand-holding-usd"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Active Investments</h3>
+                            <p id="active-investments">0</p>
+                            <span>Ongoing trades</span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon bg-danger">
+                            <i class="fas fa-piggy-bank"></i>
+                        </div>
+                        <div class="card-content">
+                            <h3>Total Deposits</h3>
+                            <p id="total-deposits">$0.00</p>
+                            <span>All time</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Market Charts Section -->
+            <section class="market-section">
+                <div class="section-header">
+                    <h2>Live Market Data</h2>
+                    <div class="time-filters">
+                        <button class="time-filter active">1D</button>
+                        <button class="time-filter">1W</button>
+                        <button class="time-filter">1M</button>
+                        <button class="time-filter">1Y</button>
+                        <button class="time-filter">ALL</button>
+                    </div>
+                </div>
+
+                <div class="market-charts">
+                    <div class="chart-container">
+                        <canvas id="btcChart"></canvas>
+                        <div class="chart-info">
+                            <h3>BTC/USD</h3>
+                            <div class="price-info">
+                                <span class="price">$63,427.18</span>
+                                <span class="change positive"><i class="fas fa-arrow-up"></i> 2.34%</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="chart-container">
+                        <canvas id="ethChart"></canvas>
+                        <div class="chart-info">
+                            <h3>ETH/USD</h3>
+                            <div class="price-info">
+                                <span class="price">$3,412.56</span>
+                                <span class="change negative"><i class="fas fa-arrow-down"></i> 1.12%</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Investment Plans Section -->
+            <section class="investment-section" id="invest">
+                <div class="section-header">
+                    <h2>Investment Plans</h2>
+                    <p>Your funds remain in your account while we trade for you</p>
+                </div>
+
+                <div class="investment-cards">
+                    <div class="investment-card">
+                        <div class="card-header">
+                            <h3>Starter Plan</h3>
+                            <div class="card-price">$4,000</div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="investment-features">
+                                <li><i class="fas fa-check"></i> 5% Daily Returns</li>
+                                <li><i class="fas fa-check"></i> 24/7 Support</li>
+                                <li><i class="fas fa-check"></i> 30 Days Duration</li>
+                                <li><i class="fas fa-check"></i> Principal Included</li>
+                            </ul>
+                            <button class="invest-btn" data-amount="4000" data-plan="starter">Invest Now</button>
+                        </div>
+                    </div>
+                    <div class="investment-card popular">
+                        <div class="popular-badge">MOST POPULAR</div>
+                        <div class="card-header">
+                            <h3>Premium Plan</h3>
+                            <div class="card-price">$10,000</div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="investment-features">
+                                <li><i class="fas fa-check"></i> 7% Daily Returns</li>
+                                <li><i class="fas fa-check"></i> Priority Support</li>
+                                <li><i class="fas fa-check"></i> 45 Days Duration</li>
+                                <li><i class="fas fa-check"></i> Principal Included</li>
+                            </ul>
+                            <button class="invest-btn" data-amount="10000" data-plan="premium">Invest Now</button>
+                        </div>
+                    </div>
+                    <div class="investment-card">
+                        <div class="card-header">
+                            <h3>Advanced Plan</h3>
+                            <div class="card-price">$20,000</div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="investment-features">
+                                <li><i class="fas fa-check"></i> 9% Daily Returns</li>
+                                <li><i class="fas fa-check"></i> VIP Support</li>
+                                <li><i class="fas fa-check"></i> 60 Days Duration</li>
+                                <li><i class="fas fa-check"></i> Principal Included</li>
+                            </ul>
+                            <button class="invest-btn" data-amount="20000" data-plan="advanced">Invest Now</button>
+                        </div>
+                    </div>
+                    <div class="investment-card">
+                        <div class="card-header">
+                            <h3>Professional Plan</h3>
+                            <div class="card-price">$30,000</div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="investment-features">
+                                <li><i class="fas fa-check"></i> 11% Daily Returns</li>
+                                <li><i class="fas fa-check"></i> Dedicated Manager</li>
+                                <li><i class="fas fa-check"></i> 90 Days Duration</li>
+                                <li><i class="fas fa-check"></i> Principal Included</li>
+                            </ul>
+                            <button class="invest-btn" data-amount="30000" data-plan="professional">Invest Now</button>
+                        </div>
+                    </div>
+                    <div class="investment-card">
+                        <div class="card-header">
+                            <h3>Executive Plan</h3>
+                            <div class="card-price">$40,000</div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="investment-features">
+                                <li><i class="fas fa-check"></i> 13% Daily Returns</li>
+                                <li><i class="fas fa-check"></i> Personal Analyst</li>
+                                <li><i class="fas fa-check"></i> 120 Days Duration</li>
+                                <li><i class="fas fa-check"></i> Principal Included</li>
+                            </ul>
+                            <button class="invest-btn" data-amount="40000" data-plan="executive">Invest Now</button>
+                        </div>
+                    </div>
+                    <div class="investment-card">
+                        <div class="card-header">
+                            <h3>VIP Plan</h3>
+                            <div class="card-price">$50,000</div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="investment-features">
+                                <li><i class="fas fa-check"></i> 15% Daily Returns</li>
+                                <li><i class="fas fa-check"></i> 24/7 Personal Support</li>
+                                <li><i class="fas fa-check"></i> 180 Days Duration</li>
+                                <li><i class="fas fa-check"></i> Principal Included</li>
+                            </ul>
+                            <button class="invest-btn" data-amount="50000" data-plan="vip">Invest Now</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- How It Works Section -->
+            <section class="how-it-works">
+                <div class="section-header">
+                    <h2>How Your Investment Works</h2>
+                    <p>Your funds remain secure in your account while we trade for you</p>
+                </div>
+
+                <div class="steps-container">
+                    <div class="step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h3>Fund Your Account</h3>
+                            <p>Deposit funds into your secure GarleyIncomeRevenue account. Your money never leaves your control.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h3>Choose Investment Plan</h3>
+                            <p>Select from our professionally managed investment portfolios based on your financial goals.</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h3>We Trade For You</h3>
+                            <p>Our expert traders use your account balance to execute trades in real markets (Forex, Crypto, Commodities).</p>
+                        </div>
+                    </div>
+                    <div class="step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h3>Earn Daily Profits</h3>
+                            <p>Watch your account grow with daily returns. Withdraw profits anytime or reinvest for compound growth.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Investment Modal -->
+            <div class="modal-overlay" id="investment-modal">
+                <div class="modal">
+                    <button class="modal-close">&times;</button>
+                    <div class="modal-header">
+                        <h3>Confirm Investment</h3>
+                    </div>
+                    <div class="modal-body">
+                        <div class="investment-summary">
+                            <div class="summary-item">
+                                <span>Plan:</span>
+                                <span id="modal-plan-name">Premium Plan</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Amount:</span>
+                                <span id="modal-invest-amount">$10,000.00</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Daily Return:</span>
+                                <span id="modal-daily-return">7% ($700.00/day)</span>
+                            </div>
+                            <div class="summary-item">
+                                <span>Duration:</span>
+                                <span id="modal-duration">45 Days</span>
+                            </div>
+                            <div class="summary-item total">
+                                <span>Total Return:</span>
+                                <span id="modal-total-return">$31,500.00</span>
+                            </div>
+                        </div>
+                        <div class="modal-actions">
+                            <button class="btn-secondary" id="cancel-invest">Cancel</button>
+                            <button class="btn-primary" id="confirm-invest">Proceed to Payment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Admin Modal -->
+            <div class="modal-overlay" id="admin-modal">
+                <div class="modal admin-modal">
+                    <button class="modal-close">&times;</button>
+                    <div class="modal-header">
+                        <h3>Admin Panel</h3>
+                        <p>Manage all user accounts and investments</p>
+                    </div>
+                    <div class="modal-body">
+                        <div class="admin-tabs">
+                            <button class="admin-tab active" data-tab="users">Users</button>
+                            <button class="admin-tab" data-tab="investments">Investments</button>
+                            <button class="admin-tab" data-tab="transactions">Transactions</button>
+                        </div>
+
+                        <div class="admin-tab-content active" id="users-tab">
+                            <div class="admin-search">
+                                <input type="text" placeholder="Search users...">
+                                <button><i class="fas fa-search"></i></button>
+                            </div>
+                            <div class="admin-table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Balance</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="users-table-body">
+                                        <!-- Users will be populated here via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="admin-tab-content" id="investments-tab">
+                            <div class="admin-table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>User</th>
+                                            <th>Plan</th>
+                                            <th>Amount</th>
+                                            <th>Start Date</th>
+                                            <th>End Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="investments-table-body">
+                                        <!-- Investments will be populated here via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                        <div class="admin-tab-content" id="transactions-tab">
+                            <div class="admin-table-container">
+                                <table class="admin-table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>User</th>
+                                            <th>Type</th>
+                                            <th>Amount</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="transactions-table-body">
+                                        <!-- Transactions will be populated here via JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="dashboard.js"></script>
+</body>
+</html>
